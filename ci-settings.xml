@@ -3,6 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
 
+    <!-- Mirror Configuration -->
     <mirrors>
         <mirror>
             <id>maven-proxy</id>
@@ -12,7 +13,9 @@
         </mirror>
     </mirrors>
 
+    <!-- Server Configuration -->
     <servers>
+        <!-- Server configuration for GitHub -->
         <server>
             <id>github</id>
             <username>${env.GITHUBACTOR}</username>
@@ -43,7 +46,9 @@
         </server>
     </servers>
 
+    <!-- Profile Configuration -->
     <profiles>
+        <!-- Profile for Sonar -->
         <profile>
             <id>sonar</id>
             <properties>
@@ -51,6 +56,8 @@
                 <sonar.login>${env.SONAR_TOKEN}</sonar.login>
             </properties>
         </profile>
+
+        <!-- Profile for GitHub -->
         <profile>
             <id>github</id>
             <repositories>
@@ -64,6 +71,7 @@
             </repositories>
         </profile>
 
+        <!-- Profile for Nexus Artifact repository -->
         <profile>
             <id>nexus</id>
             <repositories>
@@ -98,7 +106,9 @@
 
     </profiles>
 
+    <!-- Active Profiles -->
     <activeProfiles>
+        <!-- The 'nexus' profile is always active -->
         <activeProfile>nexus</activeProfile>
     </activeProfiles>
 
