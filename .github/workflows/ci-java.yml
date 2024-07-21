@@ -12,4 +12,4 @@ jobs:
         with:
           maven-args: --errors --batch-mode --show-version --update-snapshots --settings ci-utils-java/ci-settings.xml --color always --no-transfer-progress
           verify-goal: --activate-profiles gpgsigning verify
-          run-on: arc-runner-set
+          runs-on: arc-runner-set-compute-lsis
