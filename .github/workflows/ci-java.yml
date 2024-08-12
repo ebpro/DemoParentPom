@@ -11,6 +11,7 @@ jobs:
         secrets: inherit
         with:
           runs-on: arc-runner-set-compute-lsis
-          maven-args: --errors --batch-mode --show-version --update-snapshots --settings ci-utils-java/ci-settings.xml --color always --no-transfer-progress
-          verify-goal: --activate-profiles gpgsigning verify
-          deploy-goal: --activate-profiles github deploy
+          quality-goal-run: "true"
+          deploy-goal-run: "true"
+          site-goal-run: "true"
+          site-goal-branch: "master"
