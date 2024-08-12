@@ -10,6 +10,7 @@ jobs:
         uses: ebpro/gh-actions-shared-java/.github/workflows/ci-shareable-maven.yml@develop
         secrets: inherit
         with:
+          runs-on: arc-runner-set-compute-lsis
           maven-args: --errors --batch-mode --show-version --update-snapshots --settings ci-utils-java/ci-settings.xml --color always --no-transfer-progress
           verify-goal: --activate-profiles gpgsigning verify
-          runs-on: arc-runner-set-compute-lsis
+          deploy-goal: --activate-profiles github deploy
