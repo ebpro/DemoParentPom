@@ -2,6 +2,8 @@ name: CI Java (Host)
 
 on:
   push:
+    tags-ignore:
+      - '**'
   workflow_dispatch:
 
 jobs:
