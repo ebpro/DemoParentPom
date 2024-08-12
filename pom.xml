@@ -46,7 +46,7 @@
         <hibernate.version>6.5.2.Final</hibernate.version>
 
         <!-- Utils -->
-        <lombok.version>1.18.32</lombok.version>
+        <lombok.version>1.18.34</lombok.version>
         <eclipsecollections.version>11.1.0</eclipsecollections.version>
         <throwing-function.version>1.5.1</throwing-function.version>
 
