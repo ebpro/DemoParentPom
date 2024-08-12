@@ -1,0 +1,4 @@
+[submodule "ci-utils-java"]
+	path = ci-utils-java
+	url = git@github.com:ebpro/ci-utils-java.git
+	branch = develop
