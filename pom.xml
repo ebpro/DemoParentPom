@@ -1,4 +1,7 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
@@ -21,8 +24,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Java version -->
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
+        <maven.version>3.9.8</maven.version>
+
         <!-- still needed for sonar -->
         <maven.compiler.source>${maven.compiler.release}</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.release}</maven.compiler.target>
@@ -77,7 +82,7 @@
 
         <!-- Reproducibility -->
         <!--  see https://maven.apache.org/guides/mini/guide-reproducible-builds -->
-        <project.build.outputTimestamp>1723534031</project.build.outputTimestamp>
+        <project.build.outputTimestamp>1723622741</project.build.outputTimestamp>
 
         <!-- Java Module (Jigsaw) Name -->
         <project.module>${project.groupId}.${project.artifactId}</project.module>
@@ -137,6 +142,9 @@
         <mavenflatten.version>1.6.0</mavenflatten.version>
         <maveninforeport.version>3.6.0</maveninforeport.version>
         <mavenjavadoc.version>3.7.0</mavenjavadoc.version>
+
+        <!-- Release-->
+        <nexusstaging.version>1.6.7</nexusstaging.version>
 
         <!-- Final app Packaging -->
         <mavengrallvm.version>0.9.26</mavengrallvm.version>
@@ -639,7 +647,7 @@
                         <configuration>
                             <rules>
                                 <requireMavenVersion>
-                                    <version>3.6.3</version>
+                                    <version>${maven.version}</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
                                     <version>${java.version}</version>
@@ -701,7 +709,8 @@
                         <showWarnings>true</showWarnings>
                         <annotationProcessorPaths>
 
-                            <!-- TODO: add org.eclipse.persistence.jpa.modelgen.processor in a profile -->
+                            <!-- TODO: add org.eclipse.persistence.jpa.modelgen.processor in a
+                            profile -->
 
                             <!-- Lombok configuration for Java9 modularized projects -->
                             <path>
@@ -712,7 +721,8 @@
                         </annotationProcessorPaths>
                     </configuration>
                     <!-- Compile the unit test classes to the unit test output directory -->
-                    <!-- Compile the integration test classes to the integration test output directory -->
+                    <!-- Compile the integration test classes to the integration test output
+                    directory -->
                     <!--executions>
                         <execution>
                             <id>default-testCompile</id>
@@ -968,6 +978,12 @@
                     </executions>
                 </plugin>
 
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>${nexusstaging.version}</version>
+                </plugin>
+
                 <!-- Generate of website for the project. It includes static and dynamic pages,
                 and several reports.
                 See <reporting> below.
@@ -1077,7 +1093,8 @@
                             </transformer>
 
                             <!-- keep a default config file -->
-                            <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                            <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                                 <resource>config.properties</resource>
                                 <resource>log4j.properties</resource>
                             </transformer>
@@ -1251,91 +1268,91 @@
                     </configuration>
                 </plugin>
 
-            <!-- Generation of self-signed certificates -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>keytool-maven-plugin</artifactId>
-                <version>${keytool-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <id>generateKeyPair</id>
-                        <goals>
-                            <goal>generateKeyPair</goal>
-                        </goals>
-                        <configuration>
-                            <skipIfExist>true</skipIfExist>
-                            <keyalg>RSA</keyalg>
-                            <keystore>${project.basedir}/src/main/resources/mycert.p12</keystore>
-                            <storetype>PKCS12</storetype>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <id>generateCertificateRequest</id>
-                        <goals>
-                            <goal>generateCertificateRequest</goal>
-                        </goals>
-                        <configuration>
-                            <file>${project.basedir}/src/main/resources/mycert.csr</file>
-                            <keystore>${project.basedir}/src/main/resources/mycert.p12</keystore>
-                            <storetype>PKCS12</storetype>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <id>generateCertificate</id>
-                        <goals>
-                            <goal>generateCertificate</goal>
-                        </goals>
-                        <configuration>
-                            <keystore>${project.basedir}/src/main/resources/mycert.p12</keystore>
-                            <storetype>PKCS12</storetype>
-                            <infile>${project.basedir}/src/main/resources/mycert.csr</infile>
-                            <outfile>${project.basedir}/src/main/resources/mycert.crt</outfile>
-                            <rfc>true</rfc>
-                            <validity>100</validity>
-                            <sigalg>SHA256withRSA</sigalg>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <goals>
-                            <goal>exportCertificate</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <file>${project.basedir}/src/main/resources/mycert-pub.cer</file>
-                            <keystore>${project.basedir}/src/main/resources/mycert.p12</keystore>
-                            <storetype>PKCS12</storetype>
-                            <rfc>true</rfc>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>importCertificate</id>
-                        <goals>
-                            <goal>importCertificate</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <keystore>${project.basedir}/src/main/resources/mycert-pub.p12</keystore>
-                            <storetype>PKCS12</storetype>
-                            <file>${project.basedir}/src/main/resources/mycert-pub.cer</file>
-                            <trustcacerts>true</trustcacerts>
-                            <noprompt>true</noprompt>
-                            <passwordProtected>false</passwordProtected>
-                            <skipIfExist>true</skipIfExist>
-                        </configuration>
-                    </execution>
-                </executions>
+                <!-- Generation of self-signed certificates -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>keytool-maven-plugin</artifactId>
+                    <version>${keytool-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <phase>generate-resources</phase>
+                            <id>generateKeyPair</id>
+                            <goals>
+                                <goal>generateKeyPair</goal>
+                            </goals>
+                            <configuration>
+                                <skipIfExist>true</skipIfExist>
+                                <keyalg>RSA</keyalg>
+                                <keystore>${project.basedir}/src/main/resources/mycert.p12</keystore>
+                                <storetype>PKCS12</storetype>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <phase>generate-resources</phase>
+                            <id>generateCertificateRequest</id>
+                            <goals>
+                                <goal>generateCertificateRequest</goal>
+                            </goals>
+                            <configuration>
+                                <file>${project.basedir}/src/main/resources/mycert.csr</file>
+                                <keystore>${project.basedir}/src/main/resources/mycert.p12</keystore>
+                                <storetype>PKCS12</storetype>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <phase>generate-resources</phase>
+                            <id>generateCertificate</id>
+                            <goals>
+                                <goal>generateCertificate</goal>
+                            </goals>
+                            <configuration>
+                                <keystore>${project.basedir}/src/main/resources/mycert.p12</keystore>
+                                <storetype>PKCS12</storetype>
+                                <infile>${project.basedir}/src/main/resources/mycert.csr</infile>
+                                <outfile>${project.basedir}/src/main/resources/mycert.crt</outfile>
+                                <rfc>true</rfc>
+                                <validity>100</validity>
+                                <sigalg>SHA256withRSA</sigalg>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <goals>
+                                <goal>exportCertificate</goal>
+                            </goals>
+                            <phase>generate-resources</phase>
+                            <configuration>
+                                <file>${project.basedir}/src/main/resources/mycert-pub.cer</file>
+                                <keystore>${project.basedir}/src/main/resources/mycert.p12</keystore>
+                                <storetype>PKCS12</storetype>
+                                <rfc>true</rfc>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>importCertificate</id>
+                            <goals>
+                                <goal>importCertificate</goal>
+                            </goals>
+                            <phase>generate-resources</phase>
+                            <configuration>
+                                <keystore>${project.basedir}/src/main/resources/mycert-pub.p12</keystore>
+                                <storetype>PKCS12</storetype>
+                                <file>${project.basedir}/src/main/resources/mycert-pub.cer</file>
+                                <trustcacerts>true</trustcacerts>
+                                <noprompt>true</noprompt>
+                                <passwordProtected>false</passwordProtected>
+                                <skipIfExist>true</skipIfExist>
+                            </configuration>
+                        </execution>
+                    </executions>
 
-                <configuration>
-                    <storepass>storepass</storepass>
-                    <keypass>storepass</keypass>
-                    <alias>mycert</alias>
-                    <dname>cn=localhost</dname>
-                </configuration>
+                    <configuration>
+                        <storepass>storepass</storepass>
+                        <keypass>storepass</keypass>
+                        <alias>mycert</alias>
+                        <dname>cn=localhost</dname>
+                    </configuration>
 
-            </plugin>
+                </plugin>
             </plugins>
 
         </pluginManagement>
@@ -1474,9 +1491,35 @@
                     <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
                 </repository>
             </distributionManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
         <profile>
-        <id>github</id>
+            <id>github</id>
             <distributionManagement>
                 <repository>
                     <id>github</id>
@@ -1586,7 +1629,7 @@
                             <ignoreMissingDeps>true</ignoreMissingDeps>
                             <launcher>myapp=${project.module}/${app.main.class}</launcher>
                             <!-- Waiting for pull request to be merged -->
-                            <!--jlinkOptions>- -no-header-files,- -no-man-pages,- -strip-debug,- -compress=2</jlinkOptions-->
+                            <jlinkOptions>--no-header-files,- -no-man-pages,- -strip-debug,--compress=2</jlinkOptions>
                             <module>${project.module}</module>
                             <!--ignoreSigningInfo>true</ignoreSigningInfo-->
                         </configuration>
@@ -1734,14 +1777,16 @@
                         <configuration>
                             <!--suppress
                             UnresolvedMavenProperty -->
-                            <!--suppress UnresolvedMavenProperty -->
+                            <!--suppress
+                            UnresolvedMavenProperty -->
                             <argLine>${failsafe.jacoco.args}</argLine>
                         </configuration>
                     </plugin>
                     <plugin>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
-                            <!--suppress UnresolvedMavenProperty -->
+                            <!--suppress
+                            UnresolvedMavenProperty -->
                             <argLine>${surefire.jacoco.args}</argLine>
                             <testFailureIgnore>false</testFailureIgnore>
                         </configuration>
@@ -1752,9 +1797,11 @@
         <profile>
             <id>sonar</id>
             <properties>
-                <!--suppress UnresolvedMavenProperty -->
+                <!--suppress
+                UnresolvedMavenProperty -->
                 <sonar.host.url>${env.SONAR_URL}</sonar.host.url>
-                <!--suppress UnresolvedMavenProperty -->
+                <!--suppress
+                UnresolvedMavenProperty -->
                 <sonar.login>${env.SONAR_TOKEN}</sonar.login>
                 <sonar.coverage.jacoco.xmlReportPaths>
                     target/site/jacoco-merged-coverage-report/jacoco.xml
@@ -1795,8 +1842,10 @@
                                             <version>${payara.version}</version>
                                             <type>jar</type>
                                             <overWrite>false</overWrite>
-                                            <!--suppress UnresolvedMavenProperty -->
-                                            <outputDirectory>${session.executionRootDirectory}/target</outputDirectory>
+                                            <!--suppress
+                                            UnresolvedMavenProperty -->
+                                            <outputDirectory>
+                                                ${session.executionRootDirectory}/target</outputDirectory>
                                             <destFileName>payara-micro.jar</destFileName>
                                         </artifactItem>
                                     </artifactItems>
@@ -1809,11 +1858,14 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
                             <systemPropertyVariables>
-                                <!--suppress UnresolvedMavenProperty -->
+                                <!--suppress
+                                UnresolvedMavenProperty -->
                                 <!--payara.home>${session.executionRootDirectory}/target/payara6</payara.home-->
                                 <buildDirectory>${project.build.directory}</buildDirectory>
-                                <!--suppress UnresolvedMavenProperty -->
-                                <payara.microJar>${session.executionRootDirectory}/target/payara-micro.jar
+                                <!--suppress
+                                UnresolvedMavenProperty -->
+                                <payara.microJar>
+                                    ${session.executionRootDirectory}/target/payara-micro.jar
                                 </payara.microJar>
                             </systemPropertyVariables>
                         </configuration>
@@ -1823,11 +1875,14 @@
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <configuration>
                             <systemPropertyVariables>
-                                <!--suppress UnresolvedMavenProperty -->
+                                <!--suppress
+                                UnresolvedMavenProperty -->
                                 <!--payara.home>${session.executionRootDirectory}/target/payara6</payara.home-->
                                 <buildDirectory>${project.build.directory}</buildDirectory>
-                                <!--suppress UnresolvedMavenProperty -->
-                                <payara.microJar>${session.executionRootDirectory}/target/payara-micro.jar</payara.microJar>
+                                <!--suppress
+                                UnresolvedMavenProperty -->
+                                <payara.microJar>
+                                    ${session.executionRootDirectory}/target/payara-micro.jar</payara.microJar>
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>
@@ -1867,8 +1922,10 @@
                                             <version>${payara.version}</version>
                                             <type>zip</type>
                                             <overWrite>false</overWrite>
-                                            <!--suppress UnresolvedMavenProperty -->
-                                            <outputDirectory>${session.executionRootDirectory}/target</outputDirectory>
+                                            <!--suppress
+                                            UnresolvedMavenProperty -->
+                                            <outputDirectory>
+                                                ${session.executionRootDirectory}/target</outputDirectory>
                                         </artifactItem>
                                     </artifactItems>
                                 </configuration>
@@ -1901,7 +1958,8 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
                             <systemPropertyVariables>
-                                <!--suppress UnresolvedMavenProperty -->
+                                <!--suppress
+                                UnresolvedMavenProperty -->
                                 <payara.home>${session.executionRootDirectory}/target/payara6</payara.home>
                             </systemPropertyVariables>
                         </configuration>
@@ -1911,7 +1969,8 @@
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <configuration>
                             <systemPropertyVariables>
-                                <!--suppress UnresolvedMavenProperty -->
+                                <!--suppress
+                                UnresolvedMavenProperty -->
                                 <payara.home>${session.executionRootDirectory}/target/payara6</payara.home>
                                 <arquillian.launch>payara-managed</arquillian.launch>
                             </systemPropertyVariables>
