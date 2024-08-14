@@ -16,6 +16,8 @@
         <!-- These two properties should be override in subprojects -->
         <github.account>ebpro</github.account>
         <app.main.class />
+        
+        <stagingDirectory>/tmp/site</stagingDirectory>
 
         <!-- GitHub server corresponds to entry in ~/.m2/settings.xml -->
         <github.global.server>github</github.global.server>
@@ -33,22 +35,22 @@
         <maven.compiler.target>${maven.compiler.release}</maven.compiler.target>
 
         <!-- Test -->
-        <junit.version>5.10.2</junit.version>
-        <hamcrest.version>2.2</hamcrest.version>
+        <junit.version>5.10.3</junit.version>
+        <hamcrest.version>3.0</hamcrest.version>
         <mockito.version>5.12.0</mockito.version>
-        <arquillian.version>1.8.0.Final</arquillian.version>
+        <arquillian.version>1.9.1.Final</arquillian.version>
         <version.arquillian_cube>1.18.2</version.arquillian_cube>
 
-        <jsonassert.version>1.5.1</jsonassert.version>
-        <awaitility.version>4.2.1</awaitility.version>
-        <rest-assured.version>5.4.0</rest-assured.version>
-        <testcontainers.version>1.19.8</testcontainers.version>
-        <assertj.version>3.26.0</assertj.version>
+        <jsonassert.version>1.5.3</jsonassert.version>
+        <awaitility.version>4.2.2</awaitility.version>
+        <rest-assured.version>5.5.0</rest-assured.version>
+        <testcontainers.version>1.20.1</testcontainers.version>
+        <assertj.version>3.26.3</assertj.version>
 
         <!-- Persistence -->
         <jakarta.persistence.version>3.2.0</jakarta.persistence.version>
-        <eclipselink.version>4.0.3</eclipselink.version>
-        <hibernate.version>6.5.2.Final</hibernate.version>
+        <eclipselink.version>4.0.4</eclipselink.version>
+        <hibernate.version>6.6.0.Final</hibernate.version>
 
         <!-- Utils -->
         <lombok.version>1.18.34</lombok.version>
@@ -56,16 +58,16 @@
         <throwing-function.version>1.5.1</throwing-function.version>
 
         <!-- Log -->
-        <sl4j.version>2.0.13</sl4j.version>
+        <sl4j.version>2.0.16</sl4j.version>
         <logback.version>1.5.6</logback.version>
 
         <!-- Databases -->
-        <h2.version>2.2.224</h2.version>
+        <h2.version>2.3.232</h2.version>
         <postgresql.version>42.7.3</postgresql.version>
         <mysql.version>8.0.33</mysql.version>
 
         <!-- JSON -->
-        <jackson.version>2.17.1</jackson.version>
+        <jackson.version>2.17.2</jackson.version>
 
         <!-- XML -->
         <jaxb.version>4.0.2</jaxb.version>
@@ -73,16 +75,16 @@
 
         <!-- REST - JAXRS -->
         <jaxrs.version>4.0.0</jaxrs.version>
-        <jersey.version>3.1.7</jersey.version>
-        <jersey-client.version>3.1.7</jersey-client.version>
-        <jjwt.version>0.12.5</jjwt.version>
+        <jersey.version>3.1.8</jersey.version>
+        <jersey-client.version>3.1.8</jersey-client.version>
+        <jjwt.version>0.12.6</jjwt.version>
 
         <!-- WebSocket -->
-        <tyrus.version>2.1.5</tyrus.version>
+        <tyrus.version>2.2.0</tyrus.version>
 
         <!-- Reproducibility -->
         <!--  see https://maven.apache.org/guides/mini/guide-reproducible-builds -->
-        <project.build.outputTimestamp>1723623734</project.build.outputTimestamp>
+        <project.build.outputTimestamp>1723642083</project.build.outputTimestamp>
 
         <!-- Java Module (Jigsaw) Name -->
         <project.module>${project.groupId}.${project.artifactId}</project.module>
@@ -102,8 +104,8 @@
         <maven-ear-plugin.version>3.3.0</maven-ear-plugin.version>
 
         <!-- JSF -->
-        <primefaces.version>14.0.1</primefaces.version>
-        <all-themes.version>1.0.10</all-themes.version>
+        <primefaces.version>14.0.4</primefaces.version>
+        <all-themes.version>1.0.11</all-themes.version>
 
         <!-- Code coverage -->
         <jacoco.version>0.8.10</jacoco.version>
@@ -125,23 +127,23 @@
         <mavenarchetype.version>3.2.1</mavenarchetype.version>
         <mavenjavadoc.version>3.5.0</mavenjavadoc.version>
         <mavendeploy.version>3.1.2</mavendeploy.version>
-        <mavensurefire.version>3.3.0</mavensurefire.version>
-        <mavensurefirereport.version>3.3.0</mavensurefirereport.version>
-        <mavenfailsafe.version>3.3.0</mavenfailsafe.version>
+        <mavensurefire.version>3.3.1</mavensurefire.version>
+        <mavensurefirereport.version>3.3.1</mavensurefirereport.version>
+        <mavenfailsafe.version>3.3.1</mavenfailsafe.version>
         <mavensite.version>3.12.1</mavensite.version>
-        <mavenexec.version>3.3.0</mavenexec.version>
+        <mavenexec.version>3.4.1</mavenexec.version>
         <mavenshade.version>3.6.0</mavenshade.version>
         <mavenassembly.version>3.7.1</mavenassembly.version>
         <mavenscm.version>3.3.0</mavenscm.version>
-        <mavendependency.version>3.7.0</mavendependency.version>
-        <mavenrelease.version>3.1.0</mavenrelease.version>
+        <mavendependency.version>3.7.1</mavendependency.version>
+        <mavenrelease.version>3.1.1</mavenrelease.version>
         <mavenhelper.version>3.6.0</mavenhelper.version>
         <mavenhelp.version>3.4.1</mavenhelp.version>
-        <mavenversions.version>2.16.2</mavenversions.version>
+        <mavenversions.version>2.17.1</mavenversions.version>
         <mavenenforcer.version>3.5.0</mavenenforcer.version>
         <mavenflatten.version>1.6.0</mavenflatten.version>
-        <maveninforeport.version>3.6.0</maveninforeport.version>
-        <mavenjavadoc.version>3.7.0</mavenjavadoc.version>
+        <maveninforeport.version>3.6.2</maveninforeport.version>
+        <mavenjavadoc.version>3.8.0</mavenjavadoc.version>
 
         <!-- Release-->
         <nexusstaging.version>1.7.0</nexusstaging.version>
@@ -153,11 +155,11 @@
         <!-- Continuous integration -->
         <gitflow-maven-plugin.version>1.21.0</gitflow-maven-plugin.version>
         <keytool-maven-plugin.version>1.7</keytool-maven-plugin.version>
-        <testcontainers.postgresql.version>1.19.8</testcontainers.postgresql.version>
+        <testcontainers.postgresql.version>1.20.1</testcontainers.postgresql.version>
         <arquillian-weld-embedded.version>4.0.0.Final</arquillian-weld-embedded.version>
         <weld-se-core.version>5.1.2.Final</weld-se-core.version>
         <hibernate-entitymanager.version>5.6.15.Final</hibernate-entitymanager.version>
-        <hibernate-c3p0.version>6.5.2.Final</hibernate-c3p0.version>
+        <hibernate-c3p0.version>6.6.0.Final</hibernate-c3p0.version>
         <c3p0.version>0.10.1</c3p0.version>
     </properties>
 
@@ -624,6 +626,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-scm-publish-plugin</artifactId>
+                <configuration>
+                    <scmBranch>gh-pages</scmBranch>
+                </configuration>
                 <executions>
                     <execution>
                         <id>scm-publish</id>
