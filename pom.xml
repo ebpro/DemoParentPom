@@ -1532,15 +1532,6 @@
                     <url>https://maven.pkg.github.com/${github.account}/${project.artifactId}</url>
                 </snapshotRepository>
             </distributionManagement>
-            <repositories>
-                <repository>
-                    <id>github</id>
-                    <url>https://maven.pkg.github.com/${github.account}/*</url>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
         </profile>
         <profile>
             <id>shadedjar</id>
