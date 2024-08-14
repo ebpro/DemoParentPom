@@ -9,7 +9,7 @@
     <!-- The Basics -->
     <groupId>fr.ebruno.maven.poms</groupId>
     <artifactId>maven-parentpom</artifactId>
-    <version>0.1.15</version>
+    <version>0.1.16</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -82,7 +82,7 @@
 
         <!-- Reproducibility -->
         <!--  see https://maven.apache.org/guides/mini/guide-reproducible-builds -->
-        <project.build.outputTimestamp>1723623235</project.build.outputTimestamp>
+        <project.build.outputTimestamp>1723623717</project.build.outputTimestamp>
 
         <!-- Java Module (Jigsaw) Name -->
         <project.module>${project.groupId}.${project.artifactId}</project.module>
@@ -144,7 +144,7 @@
         <mavenjavadoc.version>3.7.0</mavenjavadoc.version>
 
         <!-- Release-->
-        <nexusstaging.version>1.6.7</nexusstaging.version>
+        <nexusstaging.version>1.7.0</nexusstaging.version>
 
         <!-- Final app Packaging -->
         <mavengrallvm.version>0.9.26</mavengrallvm.version>
