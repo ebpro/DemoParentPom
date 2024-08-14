@@ -9,7 +9,7 @@
     <!-- The Basics -->
     <groupId>fr.ebruno.maven.poms</groupId>
     <artifactId>maven-parentpom</artifactId>
-    <version>0.1.16</version>
+    <version>0.1.17-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -82,7 +82,7 @@
 
         <!-- Reproducibility -->
         <!--  see https://maven.apache.org/guides/mini/guide-reproducible-builds -->
-        <project.build.outputTimestamp>1723623717</project.build.outputTimestamp>
+        <project.build.outputTimestamp>1723623734</project.build.outputTimestamp>
 
         <!-- Java Module (Jigsaw) Name -->
         <project.module>${project.groupId}.${project.artifactId}</project.module>
