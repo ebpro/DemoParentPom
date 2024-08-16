@@ -211,11 +211,18 @@
     </scm>
 
     <distributionManagement>
+      <site>
+         <id>site</id>
+         <url>file:///tmp/site/staging</url>
+      </site>
+   </distributionManagement>
+
+    <!--distributionManagement>
         <site>
             <id>githubpages</id>
             <url>scm:git:ssh://git@github.com/${github.account}/${project.artifactId}.git</url>
         </site>
-    </distributionManagement>
+    </distributionManagement-->
 
     <dependencyManagement>
         <dependencies>
@@ -625,6 +632,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-scm-publish-plugin</artifactId>
                 <configuration>
+                    <pubScmUrl>scm:git:ssh://git@github.com/${github.account}/${project.artifactId}.git</pubScmUrl>
                     <scmBranch>gh-pages</scmBranch>
                 </configuration>
                 <executions>
