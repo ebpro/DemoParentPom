@@ -17,8 +17,6 @@
         <github.account>ebpro</github.account>
         <app.main.class />
         
-        <stagingDirectory>/tmp/site</stagingDirectory>
-
         <!-- GitHub server corresponds to entry in ~/.m2/settings.xml -->
         <github.global.server>github</github.global.server>
 
