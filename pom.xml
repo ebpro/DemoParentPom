@@ -122,7 +122,7 @@
         <mavenjar.version>3.4.2</mavenjar.version>
         <mavenresource.version>3.3.1</mavenresource.version>
         <maveninstall.version>3.1.2</maveninstall.version>
-        <mavenarchetype.version>3.2.1</mavenarchetype.version>
+        <mavenarchetype.version>3.3.0</mavenarchetype.version>
         <mavenjavadoc.version>3.5.0</mavenjavadoc.version>
         <mavendeploy.version>3.1.2</mavendeploy.version>
         <mavensurefire.version>3.3.1</mavensurefire.version>
